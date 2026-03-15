@@ -1,0 +1,5 @@
+AuditLogs
+| where ActivityDisplayName == "Add member to role"
+| extend Role = tostring(TargetResources[0].displayName)
+| extend AddedUser = tostring(TargetResources[1].userPrincipalName)
+| project TimeGenerated, Role, AddedUser, InitiatedBy = tostring(InitiatedBy.user.userPrincipalName)
